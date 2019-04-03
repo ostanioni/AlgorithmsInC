@@ -5,8 +5,7 @@
 - Sorting
 - Searching
 
-## Created
-### 
+## Сreated using
 + Fedora Server 29
 + Make 4.2.1
 + GCC 8.3.1
