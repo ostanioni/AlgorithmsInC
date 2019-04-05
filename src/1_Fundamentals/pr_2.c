@@ -4,8 +4,8 @@ int heads()
   { return rand() < RAND_MAX/2; }
 int main(int argc, char *argv[])
   { int i, j, cnt;
-    int N = atoi(argv[1]), M = atoi(argv[2]);
-    printf("first=%d, second=%d", N, M);
+    int N = atoi(argv[1]), M = atoi(argv[2]), K = atoi(argv[3]);
+    printf("first=%d, second=%d, third=%d", N, M, K);
     int *f =(int*) malloc((N+1)*sizeof(int));
     for (j = 0; j <= N; j++) f[j] = 0;
     for (i = 0; i < M; i++, f[cnt]++)
