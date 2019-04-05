@@ -2,7 +2,7 @@
 #include <stdio.h>
 int heads()
   { return rand() < RAND_MAX/2; }
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
   { int i, j, cnt;
     int N = atoi(argv[1]), M = atoi(argv[2]);
     int *f = malloc((N+1)*sizeof(int));
