@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 int heads()
   { return rand() < RAND_MAX/2; }
 main(int argc, char *argv[])
