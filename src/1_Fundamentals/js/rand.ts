@@ -1,30 +1,45 @@
 import StdRandom from './utils/StdRandom.js'
+import {randomInt} from 'crypto'
 
-console.log(StdRandom.uniform(2))
-/*
-const RAND_MAX = 2
+// console.log(StdRandom.uniform(2))
 
 function heads() { 
-  return StdRandom.uniform(RAND_MAX) < RAND_MAX/2
+  return randomInt(2)
+  // return StdRandom.uniform(2)
 }
-function main(N=1, M=1000){
-  let i: number, j: number, count: number
-  
-  const f = []
-  for (j = 0; j <= N; j++) f[j] = 0
-    
-  for (i = 0; i < M; i++, f[count]++)
-    for (count = 0, j = 0; j <= N; j++) 
-      if (heads()) count++
 
-  for (j = 0; j <= N; j++) {
-    console.log(j);
-    for (i = 0; i < f[j]; i+=10) console.log('*')
-      console.log('\n')
+function main(N=100, M=1000){
+
+  let experiment = () =>{
+    let count = 0
+    for(let i=0; i<N; i++){
+      if (heads() === 0)
+        count++
+    }
+    console.log(count)
+    // return count
   }
+  for(let i =1; i<100; i++)  {
+    experiment()
+  }
+  
+  /*
+  const experiments:number[] = Array(M+1).fill(0)
+  experiments.forEach(experiment)
+
+  let orderExperiments = Array(N+1).fill(0)
+  
+  for (let value of experiments) {
+    ++orderExperiments[value]
+  }
+
+  for (let item of orderExperiments) {
+    if (item === 0) continue
+    console.log('*'.repeat(item/10))
+  }*/
 }
 main()
-*/
+
 
 /*
 int main(int argc, char *argv[])
