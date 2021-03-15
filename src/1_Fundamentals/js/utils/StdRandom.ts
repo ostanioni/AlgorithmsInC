@@ -1,6 +1,5 @@
 // numeric parameter
 type numParam = number | null | undefined
-
 class StdRandom {
   // Rearranges the elements of the specified subarray in uniformly random order.
   static shuffle(a: number[]|null=null): void|never {
@@ -18,27 +17,45 @@ class StdRandom {
   static random(): number {
     return Math.random() //uniform()
   }
-  static uniform(x?:numParam, y?:numParam): number {
-    const len = arguments.length
+  static uniform(x?:numParam, y?:numParam): number | never | undefined {
+      const len = arguments.length
+
     // Returns a random real number uniformly in [0, 1)
     if ( len === 0)
       return Math.random()
 
     // Returns a random integer or real uniformly in [0, x)
     if (len === 1) {
+      if ( (x === null) || (x===undefined) )
+        throw new Error('[StdRandom.uniform]: argument is null')
+
       if (Number.isSafeInteger(arguments[0]))
         return Math.floor(Math.random() * x)
+      
       if (typeof x === 'number') 
         return StdRandom.uniform( 0.0, x )
+
+      throw new Error('[StdRandom.uniform]: argument is null')      
     }
-   
-    // Returns a random integer uniformly in [x, y)
-    if ( Number.isSafeInteger(x) && Number.isSafeInteger(y) )
-      return x + StdRandom.uniform(y - x) 
     
-    // Returns a random real number uniformly in [a, b)
-    if ( (len === 2) && (typeof x === 'number') && (typeof y === 'number') )
-      return x + StdRandom.uniform() * (y-x)
+    if (len === 2) {
+      if ( (x === null) || (x === undefined) || 
+           (y === null) || (y === undefined) )
+        throw new Error('[StdRandom.uniform]: argument is null or undefined') 
+      // Returns a random integer uniformly in [x, y)
+      if (Number.isSafeInteger(x) && Number.isSafeInteger(y)){
+        return  x + StdRandom.uniform(y - x)
+      }
+    
+      // Returns a random real number uniformly in [a, b)
+      if ((len === 2) && (typeof x === 'number') && (typeof y === 'number')){
+        return x + StdRandom.uniform() * (y-x)
+      }
+        
+    }
+    if (len > 2) {
+      throw new Error('[StdRandom.uniform]: argument is null or undefined')
+    }
   }
   /* Returns a random boolean from a Bernoulli 
   distribution with success probability */

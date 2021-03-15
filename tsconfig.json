@@ -2,32 +2,11 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "strictNullChecks": true,
-    "moduleResolution": "node",
+    "types": ["node"],
     "allowJs": false,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react",
-    "charset": "utf8",
-    "locale": "ru",
-    "strict": true,
-    "pretty": true,
-    "removeComments": true,
-    "isolatedModules": true,
-    "newLine": "LF",
-    "lib": ["dom", "dom.iterable", "scripthost", "webworker", "esnext"],
-    "baseUrl": ".",
-    "paths": {
-      "components": ["/src/components"],
-      "themes": ["/themes"],
-      "styles": ["/src/styles"],
-      "store": ["/src/store"]
-    }
+    "sourceMap": false,
+    "watch": true
   },
-  "plugins": [
-    
-  ],
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules", "**/*.spec.ts", "dist", ".vscode"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", ".vscode", "docs"]
 }

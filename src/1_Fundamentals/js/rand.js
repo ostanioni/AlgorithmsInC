@@ -1,10 +1,9 @@
-import StdRandom from './utils/StdRandom.js'
-
-console.log(StdRandom.uniform(2))
+import StdRandom from './utils/StdRandom.js';
+console.log(StdRandom.uniform(2));
 /*
 const RAND_MAX = 2
 
-function heads() { 
+function heads() {
   return StdRandom.uniform(RAND_MAX) < RAND_MAX/2
 }
 function main(N=1, M=1000){
@@ -14,7 +13,7 @@ function main(N=1, M=1000){
   for (j = 0; j <= N; j++) f[j] = 0
     
   for (i = 0; i < M; i++, f[count]++)
-    for (count = 0, j = 0; j <= N; j++) 
+    for (count = 0, j = 0; j <= N; j++)
       if (heads()) count++
 
   for (j = 0; j <= N; j++) {
@@ -25,7 +24,6 @@ function main(N=1, M=1000){
 }
 main()
 */
-
 /*
 int main(int argc, char *argv[])
   { int i, j, cnt;
@@ -34,9 +32,9 @@ int main(int argc, char *argv[])
     int *f =(int*) malloc((N+1)*sizeof(int));
     for (j = 0; j <= N; j++) f[j] = 0;
     for (i = 0; i < M; i++, f[cnt]++)
-      for (cnt = 0, j = 0; j <= N; j++) 
+      for (cnt = 0, j = 0; j <= N; j++)
         if (heads()) cnt++;
-    for (j = 0; j <= N; j++) 
+    for (j = 0; j <= N; j++)
       {
         printf("%2d ", j);
         for (i = 0; i < f[j]; i+=10) printf("*");
@@ -46,4 +44,4 @@ int main(int argc, char *argv[])
       printf("Hello\n");
       return 0;
  }
-*/
+*/ 
