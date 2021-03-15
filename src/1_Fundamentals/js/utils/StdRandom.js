@@ -1,9 +1,8 @@
 
-class stdRandom {
+class StdRandom {
   // Rearranges the elements of the specified subarray in uniformly random order.
   static function shuffle(a=null) {
-        
-    if (a == null) 
+  if (a == null) 
       throw new Error('[StdRandom.shuffle]: argument array is null or undefined') // NullPointerException
     let len = a.length
     for (let i = 0; i < n; i++) {
@@ -13,149 +12,49 @@ class stdRandom {
         a[r] = temp
     }
   }
-  // Returns a random real number uniformly in [0, 1).
-  static function uniform(n=null, m=null){
-    
-    if (n) && (!m) 
-    
-    return Math.random()
+  static function random() {
+    return Math.random() //uniform()
   }
-  // Returns a random integer uniformly in [0, n)
-  static function uniform(){
-
+  static function uniform(x=null, y=null) {
+    const len = arguments.length
+    // Returns a random real number uniformly in [0, 1)
+    if ( len === 0)
+      return Math.random()
+    
+    if ( (len === 1) {
+      if (Number.isSafeInteger(arguments[0]))
+        return uniform(0, x)
+      if (typeof x === 'number') 
+        return this.uniform( 0.0, x)
+    }    
+   
+    // Returns a random integer uniformly in [a, b)
+    if ( Number.isSafeInteger(x) && Number.isSafeInteger(y) )
+      value = a + uniform(b - a) 
+    
+    // Returns a random real number uniformly in [a, b)
+    if (len === 2) && (typeof x === 'number') && (typeof y === 'number')
+      return a + uniform() * (b-a)
   }
+  /* Returns a random boolean from a Bernoulli 
+  distribution with success probability */
+  static function bernoulli(p) { // double p
+    // Returns a random boolean from a Bernoulli distribution 
+    // with success probability 1/2.
+    if (p === undefined) 
+      return bernoulli(0.5)
 
+    // NullPointerException
+    if (p === null)
+    throw new Error('[StdRandom.bernoulli]: argument array is null or undefined')
+    
+    if (!(p >= 0.0 && p <= 1.0))
+    // IllegalArgumentException  
+      throw new RangeError('[StdRandom.bernoulli]:Probability must be between 0.0 and 1.0')
+    return uniform() < p;
+  }
 }
-
-
-
-public final class StdRandom {
-
-    private static Random random;    // pseudo-random number generator
-    private static long seed;        // pseudo-random number generator seed
-
-    // static initializer
-    static {
-        // this is how the seed was set in Java 1.4
-        seed = System.currentTimeMillis();
-        random = new Random(seed);
-    }
-
-    // don't instantiate
-    private StdRandom() { }
-
-    /**
-     * Sets the seed of the pseudorandom number generator.
-     * This method enables you to produce the same sequence of "random"
-     * number for each execution of the program.
-     * Ordinarily, you should call this method at most once per program.
-     *
-     * @param s the seed
-     */
-    public static void setSeed(long s) {
-        seed   = s;
-        random = new Random(seed);
-    }
-
-    /**
-     * Returns the seed of the pseudorandom number generator.
-     *
-     * @return the seed
-     */
-    public static long getSeed() {
-        return seed;
-    }
-
-    /**
-     * 
-     *
-     * @return a random real number uniformly in [0, 1)
-     */
-    public static double uniform() {
-        return random.nextDouble();
-    }
-
-    /**
-     * Returns a random integer uniformly in [0, n).
-     * 
-     * @param n number of possible integers
-     * @return a random integer uniformly between 0 (inclusive) and <tt>N</tt> (exclusive)
-     * @throws IllegalArgumentException if <tt>n <= 0</tt>
-     */
-    public static int uniform(int n) {
-        if (n <= 0) throw new IllegalArgumentException("Parameter N must be positive");
-        return random.nextInt(n);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    //  STATIC METHODS BELOW RELY ON JAVA.UTIL.RANDOM ONLY INDIRECTLY VIA
-    //  THE STATIC METHODS ABOVE.
-    ///////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Returns a random real number uniformly in [0, 1).
-     * 
-     * @return     a random real number uniformly in [0, 1)
-     * @deprecated Replaced by {@link #uniform()}.
-     */
-    public static double random() {
-        return uniform();
-    }
-
-    /**
-     * Returns a random integer uniformly in [a, b).
-     * 
-     * @param  a the left endpoint
-     * @param  b the right endpoint
-     * @return a random integer uniformly in [a, b)
-     * @throws IllegalArgumentException if <tt>b <= a</tt>
-     * @throws IllegalArgumentException if <tt>b - a >= Integer.MAX_VALUE</tt>
-     */
-    public static int uniform(int a, int b) {
-        if (b <= a) throw new IllegalArgumentException("Invalid range");
-        if ((long) b - a >= Integer.MAX_VALUE) throw new IllegalArgumentException("Invalid range");
-        return a + uniform(b - a);
-    }
-
-    /**
-     * Returns a random real number uniformly in [a, b).
-     * 
-     * @param  a the left endpoint
-     * @param  b the right endpoint
-     * @return a random real number uniformly in [a, b)
-     * @throws IllegalArgumentException unless <tt>a < b</tt>
-     */
-    public static double uniform(double a, double b) {
-        if (!(a < b)) throw new IllegalArgumentException("Invalid range");
-        return a + uniform() * (b-a);
-    }
-
-    /**
-     * Returns a random boolean from a Bernoulli distribution with success
-     * probability <em>p</em>.
-     *
-     * @param  p the probability of returning <tt>true</tt>
-     * @return <tt>true</tt> with probability <tt>p</tt> and
-     *         <tt>false</tt> with probability <tt>p</tt>
-     * @throws IllegalArgumentException unless <tt>p >= 0.0</tt> and <tt>p <= 1.0</tt>
-     */
-    public static boolean bernoulli(double p) {
-        if (!(p >= 0.0 && p <= 1.0))
-            throw new IllegalArgumentException("Probability must be between 0.0 and 1.0");
-        return uniform() < p;
-    }
-
-    /**
-     * Returns a random boolean from a Bernoulli distribution with success
-     * probability 1/2.
-     * 
-     * @return <tt>true</tt> with probability 1/2 and
-     *         <tt>false</tt> with probability 1/2
-     */
-    public static boolean bernoulli() {
-        return bernoulli(0.5);
-    }
-
+  
     /**
      * Returns a random real number from a standard Gaussian distribution.
      * 
