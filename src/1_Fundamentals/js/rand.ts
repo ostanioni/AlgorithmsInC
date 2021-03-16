@@ -1,44 +1,46 @@
 import StdRandom from './utils/StdRandom.js'
 import {randomInt} from 'crypto'
+import { setImmediate, setTimeout } from 'timers'
 
-// console.log(StdRandom.uniform(2))
+function main(N=100, M=100){
 
-function heads() { 
-  return randomInt(2)
-  // return StdRandom.uniform(2)
-}
-
-function main(N=100, M=1000){
+  const IntervalId = setInterval( 
+    ()=> {console.log('async')}, 1
+  )
 
   let experiment = () =>{
     let count = 0
     for(let i=0; i<N; i++){
-      if (heads() === 0)
+      if (randomInt(2) === 0)
         count++
     }
-    console.log(count)
-    // return count
+    // console.log(count)
+    return count
   }
-  for(let i =1; i<100; i++)  {
-    experiment()
+  const orderExperiments = []
+  for(let j =1; j<M; j++)  {
+    orderExperiments[experiment()] === undefined ?
+      orderExperiments[experiment()] = 1 :
+      orderExperiments[experiment()]++
   }
-  
   /*
-  const experiments:number[] = Array(M+1).fill(0)
-  experiments.forEach(experiment)
+  const gr = Array(20).fill(0)
+  for(let k=0; k<20; k++ ) {
+    gr.forEach(
 
-  let orderExperiments = Array(N+1).fill(0)
-  
-  for (let value of experiments) {
-    ++orderExperiments[value]
+    )
   }
-
-  for (let item of orderExperiments) {
-    if (item === 0) continue
-    console.log('*'.repeat(item/10))
-  }*/
+  */
+  
+  const len = orderExperiments.length
+  for(let k=0; k<len; k++ ){
+    console.log(' *'.repeat(orderExperiments[k]/3))
+  }
+  clearInterval(IntervalId)
 }
+
 main()
+
 
 
 /*
