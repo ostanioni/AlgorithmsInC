@@ -1,29 +1,36 @@
-import StdRandom from './utils/StdRandom.js';
-console.log(StdRandom.uniform(2));
-/*
-const RAND_MAX = 2
-
-function heads() {
-  return StdRandom.uniform(RAND_MAX) < RAND_MAX/2
-}
-function main(N=1, M=1000){
-  let i: number, j: number, count: number
+import { randomInt } from 'crypto';
+function main(N = 100, M = 100) {
+    const IntervalId = setInterval(() => { console.log('async'); }, 1);
+    let experiment = () => {
+        let count = 0;
+        for (let i = 0; i < N; i++) {
+            if (randomInt(2) === 0)
+                count++;
+        }
+        // console.log(count)
+        return count;
+    };
+    const orderExperiments = [];
+    for (let j = 1; j < M; j++) {
+        orderExperiments[experiment()] === undefined ?
+            orderExperiments[experiment()] = 1 :
+            orderExperiments[experiment()]++;
+    }
+    /*
+    const gr = Array(20).fill(0)
+    for(let k=0; k<20; k++ ) {
+      gr.forEach(
   
-  const f = []
-  for (j = 0; j <= N; j++) f[j] = 0
-    
-  for (i = 0; i < M; i++, f[count]++)
-    for (count = 0, j = 0; j <= N; j++)
-      if (heads()) count++
-
-  for (j = 0; j <= N; j++) {
-    console.log(j);
-    for (i = 0; i < f[j]; i+=10) console.log('*')
-      console.log('\n')
-  }
+      )
+    }
+    */
+    const len = orderExperiments.length;
+    for (let k = 0; k < len; k++) {
+        console.log(' *'.repeat(orderExperiments[k] / 3));
+    }
+    clearInterval(IntervalId);
 }
-main()
-*/
+main();
 /*
 int main(int argc, char *argv[])
   { int i, j, cnt;
